@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged Out | EventHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f1f5f9; height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; }
+        .logout-card { border: none; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; overflow: hidden; }
+        .icon-box { font-size: 3rem; color: #cbd5e1; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="card logout-card p-5" style="width: 100%; max-width: 400px;">
+        <div class="icon-box">
+            <i class="bi bi-box-arrow-right"></i>
+        </div>
+        <h2 class="fw-bold text-dark mb-3">See You Soon!</h2>
+        <p class="text-muted mb-4">You have been successfully logged out.</p>
+        
+        <div class="d-grid gap-2">
+            <a href="{% url 'login' %}" class="btn btn-primary py-2 fw-bold rounded-3">Log In Again</a>
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary py-2 fw-bold rounded-3">Go to Homepage</a>
+        </div>
+    </div>
+
+</body>
+</html>
