@@ -69,13 +69,17 @@ DATABASES = {
 }
 
 
+
 AZURE_CONNECTION_STRING = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+
 if AZURE_CONNECTION_STRING:
     DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
     AZURE_CONTAINER = 'media'
     
-    account_name = AZURE_CONNECTION_STRING.split(';')[0].split('=')[1]
-    MEDIA_URL = f'https://{account_name}.blob.core.windows.net/{AZURE_CONTAINER}/'
+    
+    AZURE_ACCOUNT_NAME = 'keremstorage01' 
+    
+    MEDIA_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
