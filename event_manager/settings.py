@@ -76,19 +76,16 @@ DATABASES = {
 
 
 
+
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-
-
 AZURE_ACCOUNT_NAME = 'keremstorage01'
 AZURE_CONTAINER = 'media'
 
 
-AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
 
+AZURE_ACCOUNT_KEY = 'QZu/U9synZ0v4mfz0r6QugHjjD+mpu4BdOOox6yKqzqMfMpAQ5hJ77jFDe3t/bdgiW8LBOfyXtHk+AStG8GXSg==' 
 
 AZURE_OVERWRITE_FILES = True
-
-
 MEDIA_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
 
 
