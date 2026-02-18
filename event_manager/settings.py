@@ -14,8 +14,10 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-for-lo
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://kerem-event-manager-dzfpegdwbqdsbzea.polandcentral-01.azurewebsites.net'
+    'https://kerem-event-manager-dzfpegdwbqdsbzea.polandcentral-01.azurewebsites.net',
+    'https://*.azurewebsites.net'  # Tüm azure alt alan adlarına izin verir
 ]
 
 # Application definition
