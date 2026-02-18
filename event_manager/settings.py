@@ -12,7 +12,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# CSRF Ayarları 
+# CSRF Ayarları - Azure domainleri için gerekli
 CSRF_TRUSTED_ORIGINS = [
     'https://kerem-event-manager-dzfpegdwbqdsbzea.polandcentral-01.azurewebsites.net',
     'https://*.azurewebsites.net'
@@ -22,7 +22,7 @@ CSRF_TRUSTED_ORIGINS = [
 INSTALLED_APPS = [
     'events',
     'users',
-    'storages',  
+    'storages',  # Azure Storage için gerekli
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,8 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'event_manager.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# Database - Azure PostgreSQL bağlantısı
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -73,29 +72,37 @@ DATABASES = {
     }
 }
 
+# --------------------------------------------------------
+# AZURE STORAGE AYARLARI (Garanti Bağlantı Yapısı)
+# --------------------------------------------------------
 
-
-
-
+# 1. Depolama Sınıfı Seçimi
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
+# 2. Azure Hesap Bilgileri
 AZURE_ACCOUNT_NAME = 'keremstorage01'
 AZURE_CONTAINER = 'media'
 
+# 3. Kimlik Doğrulama (Hata payını sıfırlamak için doğrudan Key kullanıyoruz)
+AZURE_ACCOUNT_KEY = 'QZu/U9synZ0v4mfz0r6QugHjjD+mpu4BdOOox6yKqzqMfMpAQ5hJ77jFDe3t/bdgiW8LBOfyXtHk+AStG8GXSg=='
 
+# 4. Dosya ve Klasör Ayarları
+AZURE_LOCATION = ''            # Dosyaları doğrudan media kutusuna atar
+AZURE_OVERWRITE_FILES = True    # Aynı isimli dosya gelirse üstüne yazar
+AZURE_CONNECTION_TIMEOUT = 30   # Bağlantı kopmalarını engellemek için süre artırıldı
 
-AZURE_ACCOUNT_KEY = 'QZu/U9synZ0v4mfz0r6QugHjjD+mpu4BdOOox6yKqzqMfMpAQ5hJ77jFDe3t/bdgiW8LBOfyXtHk+AStG8GXSg==' 
-
-AZURE_OVERWRITE_FILES = True
+# 5. Erişim Linki
 MEDIA_URL = f'https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{AZURE_CONTAINER}/'
 
+# --------------------------------------------------------
 
-
+# Static files (CSS, JavaScript)
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Login Redirects
+# Login/Logout Yönlendirmeleri
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
